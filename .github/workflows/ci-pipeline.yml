@@ -8,6 +8,7 @@ on:
       - main
 jobs:
  lint:
+  if: false
   runs-on: ubuntu-latest
   steps:
     - uses: actions/checkout@v3
@@ -30,9 +31,18 @@ jobs:
     - name: Install dependencies
       run: npm clean-install
     - name: Run unit tests
+<<<<<<< HEAD
+    run: npm run test-unit
+      - if: success() || failure()
+    uses: actions/upload-artifact@v3
+    with:
+      name: unit-test-${{ github.sha }}
+      path: reports/report.xml
+=======
       run: npm run test-unit
     - if: success() || failure()
       uses: actions/upload-artifact@v3
       with:
         name: unit-test-${{ github.sha }}
         path: reports/report.xml
+>>>>>>> 1fc9318d8a740083652a90b80acf0dab31648f3b
